@@ -66,7 +66,7 @@ class LLVM_OptRec_Module : public mkn::mod::Module {
   }
 
  public:
-  void link(mkn::mod::Context& ctx, YAML::Node const& node) KTHROW(std::exception) override {
+  void link(mkn::mod::Context& ctx, mkn::mod::Node const& node) KTHROW(std::exception) override {
     std::string const buildDir = ctx.state().get("buildDir", ".");
 
     mkn::kul::Dir const res{"res", buildDir};
@@ -97,7 +97,7 @@ class LLVM_OptRec_Module : public mkn::mod::Module {
     });
 
     std::string const viewer_bin = [&]() -> std::string {
-      if (node["bin"]) return node["bin"].Scalar();
+      if (node.find("bin")) return node["bin"].str();
       if (std::string const env = mkn::kul::env::GET("OPT_VIEWER"); !env.empty()) return env;
       if (std::string const guess = guess_viewer_bin(compiler.empty() ? "clang" : compiler);
           !guess.empty())
