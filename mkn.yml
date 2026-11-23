@@ -1,5 +1,8 @@
 
 name: llvm.opt
+property:
+  # dependency versions: master on master, latest on latest (a bare dep is the default branch)
+  mkn.mod.version: master
 version: master
 
 parent: base
@@ -10,13 +13,13 @@ if_arg:
 
 profile:
 - name: base
-  dep: mkn.mod
+  dep: mkn.mod#${mkn.mod.version}
 
 - name: format
   mod: |
-    clang.format{init{style: google, paths: .}}
+    clang.format#master{init{style: google, paths: .}}
 
 - name: test
   parent: base
-  mod: llvm.opt
+  mod: llvm.opt#master
   src: mod.cpp
