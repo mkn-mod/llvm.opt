@@ -2,7 +2,7 @@
 name: llvm.opt
 property:
   # dependency versions: master on master, latest on latest (a bare dep is the default branch)
-  mkn.mod.version: master
+  mkn.mod.version: latest
 version: master
 
 parent: base
@@ -17,9 +17,9 @@ profile:
 
 - name: format
   mod: |
-    clang.format#master{init{style: google, paths: .}}
+    clang.format#latest{init{style: google, paths: .}}
 
 - name: test
   parent: base
-  mod: llvm.opt#master
+  mod: llvm.opt#latest
   src: mod.cpp
